@@ -12,7 +12,6 @@ namespace NewGameFindWords
     {
         public string text { 
             get; 
-            private set; 
         }
         public bool isFound {
             get; 
@@ -20,7 +19,6 @@ namespace NewGameFindWords
         }
         public List<(int X, int Y)> busyCells { 
             get; 
-            private set; 
         }
         public Word(string s, List<(int X, int Y)> coordinates)
         {
