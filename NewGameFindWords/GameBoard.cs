@@ -10,13 +10,6 @@ namespace NewGameFindWords
     {
         Random rand = new Random();
         const int sizeOfBoard = 5;
-
-
         public List<Word> allWordsOnBoard { get; }
-
-        
-                    
-
-        }
     }
 }
