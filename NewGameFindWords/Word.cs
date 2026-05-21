@@ -26,16 +26,5 @@ namespace NewGameFindWords
             busyCells = coordinates;
             isFound = false;
         }
-        public bool ContainsCell(int x, int y)
-        {
-            foreach (var cell in busyCells)
-            {
-                if (cell.X == x && cell.Y == y)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 }
