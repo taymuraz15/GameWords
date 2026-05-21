@@ -19,9 +19,10 @@ namespace NewGameFindWords
             dataGridView1.Rows.Add(5);
             dataGridView1.Rows[0].Cells[0].Value = "А";
             gameBoard = new GameBoard();
-            gameBoard.AddWord("КОТ", new List<(int X, int Y)> { (0, 0), (1, 0), (2, 0) });
+            gameBoard.AddWord("ГÆДЫ", new List<(int X, int Y)> { (0, 0), (1, 0), (2, 0), (3,0) });
+            gameBoard.AddWord("КУЫДЗ", new List<(int X, int Y)> { (0, 2), (1, 2), (2, 2), (3, 2), (4, 2) });
             gameBoard.FillEmptyCells();
-            FillGaneTable();
+            FillGameTable();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -29,7 +30,7 @@ namespace NewGameFindWords
 
         }
 
-        private void FillGaneTable()
+        private void FillGameTable()
         {
             dataGridView1.Rows.Clear();
             dataGridView1.Rows.Add(5);
@@ -38,7 +39,7 @@ namespace NewGameFindWords
             {
                 for (int x = 0; x < 5; x++)
                 {
-                    dataGridView1.Rows[y].Cells[x].Value = gameBoard.Grid[x, y].Letter;
+                    dataGridView1.Rows[y].Cells[x].Value = gameBoard.GameTable[x, y].Letter;
                 }
             }
         }
@@ -74,13 +75,11 @@ namespace NewGameFindWords
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var foundWord = gameBoard.CheckSelection(userSelection);
+            var foundWord = gameBoard.FindWordInDictionaryByCoords(userSelection);
 
             if (foundWord != null)
             {
-                MessageBox.Show($"Ура! Вы нашли слово: {foundWord.text}");
-
-                // Красим найденное слово в зеленый навсегда
+                MessageBox.Show($"Вы нашли слово: {foundWord.text}");
                 foreach (var coord in userSelection)
                 {
                     dataGridView1.Rows[coord.Y].Cells[coord.X].Style.BackColor = Color.LightGreen;
@@ -88,16 +87,12 @@ namespace NewGameFindWords
             }
             else
             {
-                MessageBox.Show("Такого слова нет или выбраны не все буквы!");
-
-                // Сбрасываем желтый цвет на белый
+                MessageBox.Show("Такого слова нет или выбраны не все буквы");
                 foreach (var coord in userSelection)
                 {
                     dataGridView1.Rows[coord.Y].Cells[coord.X].Style.BackColor = Color.White;
                 }
             }
-
-            // Очищаем список выбора для следующего слова
             userSelection.Clear();
         }
     }
