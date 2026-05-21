@@ -82,5 +82,19 @@ namespace NewGameFindWords
             return null;
         }
 
+        public int GetCountNotFoundedWords()
+        {
+            int count = 0;
+            foreach (var word in Words)
+            {
+                if (!word.isFound) // Если слово еще не найдено
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+
     }
 }

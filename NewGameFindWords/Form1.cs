@@ -23,6 +23,8 @@ namespace NewGameFindWords
             gameBoard.AddWord("КУЫДЗ", new List<(int X, int Y)> { (0, 2), (1, 2), (2, 2), (3, 2), (4, 2) });
             gameBoard.FillEmptyCells();
             FillGameTable();
+            int countNeedToFindWords = gameBoard.GetCountNotFoundedWords();
+            labelCountFindWord.Text = countNeedToFindWords.ToString();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -83,6 +85,16 @@ namespace NewGameFindWords
                 foreach (var coord in userSelection)
                 {
                     dataGridView1.Rows[coord.Y].Cells[coord.X].Style.BackColor = Color.LightGreen;
+                }
+                int countNeedToFindWords = gameBoard.GetCountNotFoundedWords();
+
+                if (countNeedToFindWords > 0)
+                {
+                    labelCountFindWord.Text = countNeedToFindWords.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Поздравляем! Вы нашли все слова и выиграли!");
                 }
             }
             else
