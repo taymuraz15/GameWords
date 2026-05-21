@@ -9,7 +9,7 @@ namespace NewGameFindWords
     public class GameBoard
     {
         Random rand = new Random();
-        const int sizeOfBoard = 6;
+        const int sizeOfBoard = 5;
         public Cell[,] allCells { get; }
 
         public List<Word> allWordsOnBoard { get; }
