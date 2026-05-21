@@ -20,12 +20,12 @@ namespace NewGameFindWords
             get; 
         }
 
-        public bool isSelectedByUser { 
+        public bool IsSelectedByUser { 
             get; 
             set; 
         }
 
-        public bool notFree { 
+        public bool NotFree { 
             get; 
             set; 
         }
@@ -34,7 +34,8 @@ namespace NewGameFindWords
             X = x;
             Y = y;
             Letter = ' ';
-            isSelectedByUser = false;
+            IsSelectedByUser = false;
+            NotFree = false;
         }
     }
 }
