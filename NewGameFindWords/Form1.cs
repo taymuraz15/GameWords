@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace NewGameFindWords
 {
@@ -14,20 +15,24 @@ namespace NewGameFindWords
     {
         GameBoard gameBoard;
         List<(int X, int Y)> userSelection = new List<(int X, int Y)>();
-
+        
+        string currentPlayerName = "Игрок";
+        int countPodskazok = 0;
         string currentTheme = "Животные";
         string currentDifficulty = "Легко";
         int secondsPassed = 0;
         int currentRoundTimeLimit = 90; 
 
-        public Form1()
+        public Form1(string name)
         {
             InitializeComponent();
+            currentPlayerName = name; 
             StartNewGame();
         }
 
         void StartNewGame()
         {
+            countPodskazok = 0;
             userSelection.Clear();
             int boardSize = 5;
             int wordsCountToPlace = 2;
@@ -111,24 +116,20 @@ namespace NewGameFindWords
 
             int size = gameBoard.Size;
 
-            // 1. Создаем колонки динамически (их ширину как Fill настроит сам дизайнер)
             for (int i = 0; i < size; i++)
             {
                 var column = new DataGridViewTextBoxColumn();
                 dataGridView1.Columns.Add(column);
             }
 
-            // 2. Создаем строки
             dataGridView1.Rows.Add(size);
 
-            // 3. Вычисляем точную высоту одной строки на основе размера таблицы на экране
-            // Вычитаем 2 пикселя, чтобы избежать появления вертикального скролла
             int calculatedRowHeight = (dataGridView1.ClientSize.Height - 2) / size;
 
             // 4. Задаем высоту строк и заполняем буквами
             for (int y = 0; y < size; y++)
             {
-                dataGridView1.Rows[y].Height = calculatedRowHeight; // Вот эта магия!
+                dataGridView1.Rows[y].Height = calculatedRowHeight; 
 
                 for (int x = 0; x < size; x++)
                 {
@@ -182,11 +183,40 @@ namespace NewGameFindWords
                 int countNeedToFindWords = gameBoard.GetCountNotFoundedWords();
 
                 labelCountFindWord.Text = countNeedToFindWords.ToString();
-
                 if (countNeedToFindWords == 0)
                 {
-                    MessageBox.Show("Поздравляем! Вы нашли все слова и выиграли!");
+                    wordTimer.Stop();
+                    string timeSpent = FormatTime(secondsPassed);
+
+                    string filePath = "records.json";
+                    List<Dictionary<string, string>> allRecords = new List<Dictionary<string, string>>();
+
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        try
+                        {
+                            string jsonString = System.IO.File.ReadAllText(filePath);
+                            allRecords = System.Text.Json.JsonSerializer.Deserialize<List<Dictionary<string, string>>>(jsonString);
+                        }
+                        catch {  }
+                    }
+
+                    Dictionary<string, string> newGameData = new Dictionary<string, string>();
+                    newGameData["Имя"] = currentPlayerName;
+                    newGameData["Время"] = timeSpent;
+                    newGameData["Подсказки"] = countPodskazok.ToString();
+                    newGameData["Тема"] = currentTheme;
+                    newGameData["Сложность"] = currentDifficulty;
+
+                    allRecords.Add(newGameData);
+
+                    var options = new System.Text.Json.JsonSerializerOptions { WriteIndented = true }; // Чтобы текст в файле был красивым, с отступами
+                    string updatedJson = System.Text.Json.JsonSerializer.Serialize(allRecords, options);
+                    System.IO.File.WriteAllText(filePath, updatedJson);
+
+                    MessageBox.Show($"Поздравляем! Вы нашли все слова и выиграли! Штрафных баллов: {countPodskazok}");
                     StartNewGame();
+                    return;
                 }
             }
             else
@@ -222,7 +252,8 @@ namespace NewGameFindWords
 
             if (hintWord != null)
             {
-                MessageBox.Show($"Подсказка: Попробуй найти слово «{hintWord}»!", "Подсказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                countPodskazok++;
+                MessageBox.Show($"Подсказка: Попробуй найти слово «{hintWord}»!", "Подсказка", MessageBoxButtons.OK);
             }
             else
             {
@@ -266,5 +297,35 @@ namespace NewGameFindWords
             return $"{minutes:00}:{seconds:00}";
         }
 
+        private void сохранитьРезультатToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            wordTimer.Stop();
+
+            NameInputForm nameForm = new NameInputForm();
+
+            if (nameForm.ShowDialog() == DialogResult.OK)
+            {
+                currentPlayerName = nameForm.PlayerName;
+                StartNewGame();
+            }
+            else
+            {
+                wordTimer.Start();
+            }
+        }
+
+        private void результатыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            wordTimer.Stop();
+
+            // Создаем экземпляр окна результатов
+            RecordsForm recordsWindow = new RecordsForm();
+
+            // Открываем его модально (поверх игры)
+            recordsWindow.ShowDialog();
+
+            // Когда игрок закроет окно рекордов, возвращаем таймер игры назад
+            wordTimer.Start();
+        }
     }
 }

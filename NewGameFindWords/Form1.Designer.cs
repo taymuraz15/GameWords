@@ -187,7 +187,7 @@
             this.подсказкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(795, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -203,14 +203,14 @@
             // животныеToolStripMenuItem
             // 
             this.животныеToolStripMenuItem.Name = "животныеToolStripMenuItem";
-            this.животныеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.животныеToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.животныеToolStripMenuItem.Text = "Животные";
             this.животныеToolStripMenuItem.Click += new System.EventHandler(this.животныеToolStripMenuItem_Click);
             // 
             // едаToolStripMenuItem
             // 
             this.едаToolStripMenuItem.Name = "едаToolStripMenuItem";
-            this.едаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.едаToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.едаToolStripMenuItem.Text = "Еда";
             this.едаToolStripMenuItem.Click += new System.EventHandler(this.едаToolStripMenuItem_Click_1);
             // 
@@ -226,28 +226,30 @@
             // легко5Х5ToolStripMenuItem
             // 
             this.легко5Х5ToolStripMenuItem.Name = "легко5Х5ToolStripMenuItem";
-            this.легко5Х5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.легко5Х5ToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.легко5Х5ToolStripMenuItem.Text = "Легко 5 х 5";
             this.легко5Х5ToolStripMenuItem.Click += new System.EventHandler(this.легко5Х5ToolStripMenuItem_Click);
             // 
             // нормально7Х7ToolStripMenuItem
             // 
             this.нормально7Х7ToolStripMenuItem.Name = "нормально7Х7ToolStripMenuItem";
-            this.нормально7Х7ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.нормально7Х7ToolStripMenuItem.Size = new System.Drawing.Size(165, 22);
             this.нормально7Х7ToolStripMenuItem.Text = "Нормально 7 х 7";
             this.нормально7Х7ToolStripMenuItem.Click += new System.EventHandler(this.нормально7Х7ToolStripMenuItem_Click);
             // 
             // сохранитьРезультатToolStripMenuItem
             // 
             this.сохранитьРезультатToolStripMenuItem.Name = "сохранитьРезультатToolStripMenuItem";
-            this.сохранитьРезультатToolStripMenuItem.Size = new System.Drawing.Size(133, 20);
-            this.сохранитьРезультатToolStripMenuItem.Text = "Сохранить результат";
+            this.сохранитьРезультатToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.сохранитьРезультатToolStripMenuItem.Text = "Новая Игра";
+            this.сохранитьРезультатToolStripMenuItem.Click += new System.EventHandler(this.сохранитьРезультатToolStripMenuItem_Click);
             // 
             // результатыToolStripMenuItem
             // 
             this.результатыToolStripMenuItem.Name = "результатыToolStripMenuItem";
             this.результатыToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.результатыToolStripMenuItem.Text = "Результаты";
+            this.результатыToolStripMenuItem.Click += new System.EventHandler(this.результатыToolStripMenuItem_Click);
             // 
             // подсказкаToolStripMenuItem
             // 
@@ -274,7 +276,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(795, 571);
             this.Controls.Add(this.labelTimer);
             this.Controls.Add(this.labelCountFindWord);
             this.Controls.Add(this.label2);

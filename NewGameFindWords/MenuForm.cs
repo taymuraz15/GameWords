@@ -19,11 +19,27 @@ namespace NewGameFindWords
 
         private void buttonPlay_Click(object sender, EventArgs e)
         {
-            Form1 game = new Form1();
+            NameInputForm nameForm = new NameInputForm();
 
-            game.Show();
+            // Показываем его модально (пока игрок не закроет его, меню будет недоступно)
+            if (nameForm.ShowDialog() == DialogResult.OK)
+            {
+                // Получаем имя из формы
+                string playerName = nameForm.PlayerName;
 
-            this.Hide();
+                // 2. Запускаем игру и передаем туда имя (а тему пока оставим по умолчанию)
+                Form1 game = new Form1(playerName);
+
+                game.Show();
+                this.Hide(); // Прячем меню
+
+                game.FormClosed += (s, args) => this.Close();
+            }
+        }
+
+        private void MenuForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
