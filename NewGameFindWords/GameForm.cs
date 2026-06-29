@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace NewGameFindWords
 {
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
         GameBoard gameBoard;
         List<(int X, int Y)> userSelection = new List<(int X, int Y)>();
@@ -23,7 +23,7 @@ namespace NewGameFindWords
         int secondsPassed = 0;
         int currentRoundTimeLimit = 90; 
 
-        public Form1(string name)
+        public GameForm(string name)
         {
             InitializeComponent();
             currentPlayerName = name; 

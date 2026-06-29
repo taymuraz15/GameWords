@@ -1,6 +1,6 @@
 ﻿namespace NewGameFindWords
 {
-    partial class Form1
+    partial class GameForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -88,7 +88,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView1.Location = new System.Drawing.Point(233, 190);
+            this.dataGridView1.Location = new System.Drawing.Point(318, 195);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -139,7 +139,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(561, 250);
+            this.button1.Location = new System.Drawing.Point(656, 303);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 34);
             this.button1.TabIndex = 1;
@@ -151,7 +151,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MV Boli", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(192, 40);
+            this.label1.Location = new System.Drawing.Point(224, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(437, 49);
             this.label1.TabIndex = 2;
@@ -161,7 +161,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Lucida Sans Unicode", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(41, 130);
+            this.label2.Location = new System.Drawing.Point(33, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(289, 28);
             this.label2.TabIndex = 3;
@@ -187,7 +187,7 @@
             this.подсказкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(795, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(912, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -266,17 +266,19 @@
             // labelTimer
             // 
             this.labelTimer.AutoSize = true;
-            this.labelTimer.Location = new System.Drawing.Point(593, 133);
+            this.labelTimer.Location = new System.Drawing.Point(674, 184);
             this.labelTimer.Name = "labelTimer";
             this.labelTimer.Size = new System.Drawing.Size(35, 13);
             this.labelTimer.TabIndex = 6;
             this.labelTimer.Text = "label3";
             // 
-            // Form1
+            // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 571);
+            this.BackgroundImage = global::NewGameFindWords.Properties.Resources.main3;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(912, 571);
             this.Controls.Add(this.labelTimer);
             this.Controls.Add(this.labelCountFindWord);
             this.Controls.Add(this.label2);
@@ -285,8 +287,8 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "GameForm";
+            this.Text = "Игра Найди слово";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);

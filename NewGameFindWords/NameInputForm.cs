@@ -37,5 +37,10 @@ namespace NewGameFindWords
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void textBoxPlayerName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

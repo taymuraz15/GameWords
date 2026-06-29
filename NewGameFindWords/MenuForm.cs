@@ -28,7 +28,7 @@ namespace NewGameFindWords
                 string playerName = nameForm.PlayerName;
 
                 // 2. Запускаем игру и передаем туда имя (а тему пока оставим по умолчанию)
-                Form1 game = new Form1(playerName);
+                GameForm game = new GameForm(playerName);
 
                 game.Show();
                 this.Hide(); // Прячем меню
