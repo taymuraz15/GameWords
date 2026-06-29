@@ -17,6 +17,8 @@ namespace NewGameFindWords
 
         string currentTheme = "Животные";
         string currentDifficulty = "Легко";
+        int secondsPassed = 0;
+        int currentRoundTimeLimit = 90; 
 
         public Form1()
         {
@@ -30,11 +32,19 @@ namespace NewGameFindWords
             int boardSize = 5;
             int wordsCountToPlace = 2;
 
-            if (currentDifficulty == "Нормально")
+            if (currentDifficulty == "Легко")
+            {
+                boardSize = 5;
+                wordsCountToPlace = 2;
+                currentRoundTimeLimit = 90; 
+            }
+            else if (currentDifficulty == "Нормально")
             {
                 boardSize = 7;
-                wordsCountToPlace = 4; // На большом поле ищем 4 слова!
+                wordsCountToPlace = 4;
+                currentRoundTimeLimit = 180; 
             }
+
             gameBoard = new GameBoard(boardSize);
 
             List<string> themeWordsBank = new List<string>();
@@ -84,6 +94,9 @@ namespace NewGameFindWords
             labelCountFindWord.Text = countNeedToFindWords.ToString();
 
             this.Text = $"Поиск слов | Тема: {currentTheme} | Сложность: {currentDifficulty}";
+            secondsPassed = 0;
+            labelTimer.Text = $"Осталось времени: {FormatTime(currentRoundTimeLimit)}";
+            wordTimer.Start();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -228,5 +241,30 @@ namespace NewGameFindWords
             currentDifficulty = "Нормально";
             StartNewGame();
         }
+
+        private void wordTimer_Tick(object sender, EventArgs e)
+        {
+            secondsPassed++; 
+
+            int timeLeft = currentRoundTimeLimit - secondsPassed; 
+
+            labelTimer.Text = $"Осталось времени: {FormatTime(timeLeft)}";
+
+            if (timeLeft <= 0)
+            {
+                wordTimer.Stop();
+                MessageBox.Show("Время раунда вышло! Вы проиграли. Игра начнется заново.", "Поражение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                StartNewGame(); 
+            }
+        }
+        
+        private string FormatTime(int totalSeconds)
+        {
+            int minutes = totalSeconds / 60;
+            int seconds = totalSeconds % 60;
+            return $"{minutes:00}:{seconds:00}";
+        }
+
     }
 }
