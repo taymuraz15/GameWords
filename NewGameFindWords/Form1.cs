@@ -27,7 +27,15 @@ namespace NewGameFindWords
         void StartNewGame()
         {
             userSelection.Clear();
-            gameBoard = new GameBoard();
+            int boardSize = 5;
+            int wordsCountToPlace = 2;
+
+            if (currentDifficulty == "Нормально")
+            {
+                boardSize = 7;
+                wordsCountToPlace = 4; // На большом поле ищем 4 слова!
+            }
+            gameBoard = new GameBoard(boardSize);
 
             List<string> themeWordsBank = new List<string>();
 
@@ -54,10 +62,12 @@ namespace NewGameFindWords
                 themeWordsBank[i] = themeWordsBank[j];
                 themeWordsBank[j] = temp;
             }
+
+
             int wordsPlaced = 0;
             foreach (var wordText in themeWordsBank)
             {
-                if (wordsPlaced >= 2) break; 
+                if (wordsPlaced >= wordsCountToPlace) break;
 
                 bool success = gameBoard.TryAutoAddWord(wordText);
                 if (success)
@@ -84,16 +94,37 @@ namespace NewGameFindWords
         private void FillGameTable()
         {
             dataGridView1.Rows.Clear();
-            dataGridView1.Rows.Add(5);
+            dataGridView1.Columns.Clear();
 
-            for (int y = 0; y < 5; y++)
+            int size = gameBoard.Size;
+
+            // 1. Создаем колонки динамически (их ширину как Fill настроит сам дизайнер)
+            for (int i = 0; i < size; i++)
             {
-                for (int x = 0; x < 5; x++)
+                var column = new DataGridViewTextBoxColumn();
+                dataGridView1.Columns.Add(column);
+            }
+
+            // 2. Создаем строки
+            dataGridView1.Rows.Add(size);
+
+            // 3. Вычисляем точную высоту одной строки на основе размера таблицы на экране
+            // Вычитаем 2 пикселя, чтобы избежать появления вертикального скролла
+            int calculatedRowHeight = (dataGridView1.ClientSize.Height - 2) / size;
+
+            // 4. Задаем высоту строк и заполняем буквами
+            for (int y = 0; y < size; y++)
+            {
+                dataGridView1.Rows[y].Height = calculatedRowHeight; // Вот эта магия!
+
+                for (int x = 0; x < size; x++)
                 {
                     dataGridView1.Rows[y].Cells[x].Value = gameBoard.GameTable[x, y].Letter;
                 }
             }
         }
+
+
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -156,11 +187,7 @@ namespace NewGameFindWords
             userSelection.Clear();
         }
 
-       
-        
-
-        
-
+      
         private void едаToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             currentTheme = "Еда";
@@ -172,6 +199,33 @@ namespace NewGameFindWords
         private void животныеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             currentTheme = "Животные";
+            StartNewGame();
+        }
+
+        private void подсказкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Запрашиваем у мозга игры одно ненайденное слово
+            string hintWord = gameBoard.GetRandomNotFoundedWord();
+
+            if (hintWord != null)
+            {
+                MessageBox.Show($"Подсказка: Попробуй найти слово «{hintWord}»!", "Подсказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Все слова уже найдены!", "Ой", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void легко5Х5ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            currentDifficulty = "Легко";
+            StartNewGame();
+        }
+
+        private void нормально7Х7ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            currentDifficulty = "Нормально";
             StartNewGame();
         }
     }

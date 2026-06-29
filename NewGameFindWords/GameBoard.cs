@@ -11,13 +11,16 @@ namespace NewGameFindWords
     public class GameBoard
     {
         Random rand = new Random();
-        const int Size = 5;
+        public int Size { get; private set; }
         public Cell[,] GameTable { get; }
         public List<Word> Words { get; }
 
-        public GameBoard()
+        public GameBoard(int size)
         {
+            Size = size; 
+
             GameTable = new Cell[Size, Size];
+
             for (int y = 0; y < Size; y++)
             {
                 for (int x = 0; x < Size; x++)
@@ -25,8 +28,10 @@ namespace NewGameFindWords
                     GameTable[x, y] = new Cell(x, y);
                 }
             }
+
             Words = new List<Word>();
         }
+
 
         public void AddWord(string text, List<(int X, int Y)> coords)
         {
@@ -148,7 +153,6 @@ namespace NewGameFindWords
                 return false;
             }
 
-            Random rand = new Random();
             var chosenPosition = validPositions[rand.Next(validPositions.Count)];
 
             List<(int X, int Y)> finalCoords = new List<(int X, int Y)>();
@@ -175,6 +179,28 @@ namespace NewGameFindWords
             return true;
         }
 
+        public string GetRandomNotFoundedWord()
+        {
+            // Создаем список для слов, которые игрок еще не нашел
+            List<Word> notFoundWords = new List<Word>();
+
+            foreach (var word in Words)
+            {
+                if (!word.isFound)
+                {
+                    notFoundWords.Add(word);
+                }
+            }
+
+            if (notFoundWords.Count == 0)
+            {
+                return null;
+            }
+
+            Word randomWord = notFoundWords[rand.Next(notFoundWords.Count)];
+
+            return randomWord.text;
+        }
 
 
     }
