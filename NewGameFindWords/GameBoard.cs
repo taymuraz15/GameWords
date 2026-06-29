@@ -108,7 +108,7 @@ namespace NewGameFindWords
 
             if (wordLength > Size) return false;
 
-            var validPositions = new List<(int X, int Y, bool IsHorizontal)>();
+            var freePositions = new List<(int X, int Y, bool IsHorizontal)>();
 
             for (int y = 0; y < Size; y++)
             {
@@ -125,7 +125,7 @@ namespace NewGameFindWords
                     }
                     if (canPlace)
                     {
-                        validPositions.Add((x, y, true));
+                        freePositions.Add((x, y, true));
                     }
                 }
             }
@@ -144,16 +144,16 @@ namespace NewGameFindWords
                     }
                     if (canPlace)
                     {
-                        validPositions.Add((x, y, false));
+                        freePositions.Add((x, y, false));
                     }
                 }
             }
-            if (validPositions.Count == 0)
+            if (freePositions.Count == 0)
             {
                 return false;
             }
 
-            var chosenPosition = validPositions[rand.Next(validPositions.Count)];
+            var chosenPosition = freePositions[rand.Next(freePositions.Count)];
 
             List<(int X, int Y)> finalCoords = new List<(int X, int Y)>();
             for (int i = 0; i < wordLength; i++)

@@ -21,22 +21,16 @@ namespace NewGameFindWords
         {
             NameInputForm nameForm = new NameInputForm();
 
-            // Показываем его модально (пока игрок не закроет его, меню будет недоступно)
             if (nameForm.ShowDialog() == DialogResult.OK)
             {
-                // Получаем имя из формы
                 string playerName = nameForm.PlayerName;
-
-                // 2. Запускаем игру и передаем туда имя (а тему пока оставим по умолчанию)
                 GameForm game = new GameForm(playerName);
 
-                game.Show();
-                this.Hide(); // Прячем меню
-
-                game.FormClosed += (s, args) => this.Close();
+                this.Hide();        
+                game.ShowDialog();  
+                this.Close();
             }
         }
-
         private void MenuForm_Load(object sender, EventArgs e)
         {
 

@@ -32,7 +32,6 @@ namespace NewGameFindWords
                 return;
             }
 
-            // Сохраняем имя, закрываем форму с успешным результатом
             PlayerName = textBoxPlayerName.Text.Trim();
             this.DialogResult = DialogResult.OK;
             this.Close();
