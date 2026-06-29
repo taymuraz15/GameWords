@@ -57,15 +57,13 @@ namespace NewGameFindWords
             if (currentTheme == "Животные")
             {
                 themeWordsBank.AddRange(new string[] {
-                    "ГÆДЫ", "КУЫДЗ", "РУВАС", "БÆХ",
-                    "ГАЛ", "ЦÆГÆР", "АРС", "БИРÆГ", "СТЫР"
+                    "КУЫДЗ", "ГÆДЫ", "РУВАС", "ХЪУГ", "ПЫЛ", "БАБЫЗ", "КАРК", "БÆХ", "АРС", "УАСÆГ"
                 });
             }
-            else if (currentTheme == "Еда")
+            else if (currentTheme == "Люди")
             {
                 themeWordsBank.AddRange(new string[] {
-                    "НУРР", "СЫРХ", "ÆХСЫР", "ЦÆХХ",
-                    "ДУР", "КАША", "СУПП", "БÆРÆГ", "ФЫД"
+                    "МАД", "ФЫД", "ХО", "НАНА", "ДАДА", "ФЫРТ", "ЧЫЗГ", "СЫХАГ"
                 });
             }
 
@@ -100,7 +98,7 @@ namespace NewGameFindWords
 
             this.Text = $"Поиск слов | Тема: {currentTheme} | Сложность: {currentDifficulty}";
             secondsPassed = 0;
-            labelTimer.Text = $"Осталось времени: {FormatTime(currentRoundTimeLimit)}";
+            labelTimer.Text = FormatTime(currentRoundTimeLimit);
             wordTimer.Start();
         }
 
@@ -233,7 +231,7 @@ namespace NewGameFindWords
       
         private void едаToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            currentTheme = "Еда";
+            currentTheme = "Люди";
             StartNewGame();
         }
 
@@ -279,7 +277,7 @@ namespace NewGameFindWords
 
             int timeLeft = currentRoundTimeLimit - secondsPassed; 
 
-            labelTimer.Text = $"Осталось времени: {FormatTime(timeLeft)}";
+            labelTimer.Text = FormatTime(timeLeft);
 
             if (timeLeft <= 0)
             {

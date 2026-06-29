@@ -46,5 +46,10 @@ namespace NewGameFindWords
                 listBoxRecords.Items.Add("История игр пока пуста. Сыграйте и победите в первом раунде!");
             }
         }
+
+        private void listBoxRecords_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
