@@ -1,6 +1,6 @@
 ﻿namespace NewGameFindWords
 {
-    partial class Form1
+    partial class GameForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,7 +42,21 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.labelCountFindWord = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.темыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.животныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.едаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сложностьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.легко5Х5ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.нормально7Х7ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьРезультатToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.результатыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.подсказкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wordTimer = new System.Windows.Forms.Timer(this.components);
+            this.labelTimer = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -74,7 +89,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView1.Location = new System.Drawing.Point(273, 210);
+            this.dataGridView1.Location = new System.Drawing.Point(318, 195);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -88,7 +103,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(188, 113);
+            this.dataGridView1.Size = new System.Drawing.Size(250, 248);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -125,7 +140,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Arial Black", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(561, 250);
+            this.button1.Location = new System.Drawing.Point(656, 303);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 34);
             this.button1.TabIndex = 1;
@@ -137,7 +152,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MV Boli", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(192, 20);
+            this.label1.Location = new System.Drawing.Point(190, 90);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(437, 49);
             this.label1.TabIndex = 2;
@@ -147,7 +162,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Lucida Sans Unicode", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(41, 130);
+            this.label2.Location = new System.Drawing.Point(12, 234);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(289, 28);
             this.label2.TabIndex = 3;
@@ -157,26 +172,141 @@
             // 
             this.labelCountFindWord.AutoSize = true;
             this.labelCountFindWord.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCountFindWord.Location = new System.Drawing.Point(393, 133);
+            this.labelCountFindWord.Location = new System.Drawing.Point(139, 286);
             this.labelCountFindWord.Name = "labelCountFindWord";
             this.labelCountFindWord.Size = new System.Drawing.Size(24, 25);
             this.labelCountFindWord.TabIndex = 4;
             this.labelCountFindWord.Text = "0";
             // 
-            // Form1
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.темыToolStripMenuItem,
+            this.сложностьToolStripMenuItem,
+            this.сохранитьРезультатToolStripMenuItem,
+            this.результатыToolStripMenuItem,
+            this.подсказкаToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(935, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // темыToolStripMenuItem
+            // 
+            this.темыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.животныеToolStripMenuItem,
+            this.едаToolStripMenuItem});
+            this.темыToolStripMenuItem.Name = "темыToolStripMenuItem";
+            this.темыToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.темыToolStripMenuItem.Text = "Темы";
+            // 
+            // животныеToolStripMenuItem
+            // 
+            this.животныеToolStripMenuItem.Name = "животныеToolStripMenuItem";
+            this.животныеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.животныеToolStripMenuItem.Text = "Животные";
+            this.животныеToolStripMenuItem.Click += new System.EventHandler(this.животныеToolStripMenuItem_Click);
+            // 
+            // едаToolStripMenuItem
+            // 
+            this.едаToolStripMenuItem.Name = "едаToolStripMenuItem";
+            this.едаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.едаToolStripMenuItem.Text = "Люди";
+            this.едаToolStripMenuItem.Click += new System.EventHandler(this.едаToolStripMenuItem_Click_1);
+            // 
+            // сложностьToolStripMenuItem
+            // 
+            this.сложностьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.легко5Х5ToolStripMenuItem,
+            this.нормально7Х7ToolStripMenuItem});
+            this.сложностьToolStripMenuItem.Name = "сложностьToolStripMenuItem";
+            this.сложностьToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.сложностьToolStripMenuItem.Text = "Сложность";
+            // 
+            // легко5Х5ToolStripMenuItem
+            // 
+            this.легко5Х5ToolStripMenuItem.Name = "легко5Х5ToolStripMenuItem";
+            this.легко5Х5ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.легко5Х5ToolStripMenuItem.Text = "Легко 5 х 5";
+            this.легко5Х5ToolStripMenuItem.Click += new System.EventHandler(this.легко5Х5ToolStripMenuItem_Click);
+            // 
+            // нормально7Х7ToolStripMenuItem
+            // 
+            this.нормально7Х7ToolStripMenuItem.Name = "нормально7Х7ToolStripMenuItem";
+            this.нормально7Х7ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.нормально7Х7ToolStripMenuItem.Text = "Нормально 7 х 7";
+            this.нормально7Х7ToolStripMenuItem.Click += new System.EventHandler(this.нормально7Х7ToolStripMenuItem_Click);
+            // 
+            // сохранитьРезультатToolStripMenuItem
+            // 
+            this.сохранитьРезультатToolStripMenuItem.Name = "сохранитьРезультатToolStripMenuItem";
+            this.сохранитьРезультатToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.сохранитьРезультатToolStripMenuItem.Text = "Новая Игра";
+            this.сохранитьРезультатToolStripMenuItem.Click += new System.EventHandler(this.сохранитьРезультатToolStripMenuItem_Click);
+            // 
+            // результатыToolStripMenuItem
+            // 
+            this.результатыToolStripMenuItem.Name = "результатыToolStripMenuItem";
+            this.результатыToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.результатыToolStripMenuItem.Text = "Результаты";
+            this.результатыToolStripMenuItem.Click += new System.EventHandler(this.результатыToolStripMenuItem_Click);
+            // 
+            // подсказкаToolStripMenuItem
+            // 
+            this.подсказкаToolStripMenuItem.Name = "подсказкаToolStripMenuItem";
+            this.подсказкаToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.подсказкаToolStripMenuItem.Text = "Подсказка";
+            this.подсказкаToolStripMenuItem.Click += new System.EventHandler(this.подсказкаToolStripMenuItem_Click);
+            // 
+            // wordTimer
+            // 
+            this.wordTimer.Interval = 1000;
+            this.wordTimer.Tick += new System.EventHandler(this.wordTimer_Tick);
+            // 
+            // labelTimer
+            // 
+            this.labelTimer.AutoSize = true;
+            this.labelTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTimer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.labelTimer.Location = new System.Drawing.Point(83, 417);
+            this.labelTimer.Name = "labelTimer";
+            this.labelTimer.Size = new System.Drawing.Size(152, 55);
+            this.labelTimer.TabIndex = 6;
+            this.labelTimer.Text = "label3";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Lucida Sans Unicode", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(25, 364);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(255, 28);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Осталось времени:";
+            // 
+            // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackgroundImage = global::NewGameFindWords.Properties.Resources.main5;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(935, 571);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelTimer);
             this.Controls.Add(this.labelCountFindWord);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "GameForm";
+            this.Text = "Игра Найди слово";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,6 +324,19 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelCountFindWord;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem темыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem животныеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem едаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сложностьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem легко5Х5ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem нормально7Х7ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьРезультатToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem результатыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem подсказкаToolStripMenuItem;
+        private System.Windows.Forms.Timer wordTimer;
+        private System.Windows.Forms.Label labelTimer;
+        private System.Windows.Forms.Label label3;
     }
 }
 

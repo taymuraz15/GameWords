@@ -1,6 +1,6 @@
 ﻿namespace NewGameFindWords
 {
-    partial class MenuForm
+    partial class RecordsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,40 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonPlay = new System.Windows.Forms.Button();
+            this.listBoxRecords = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // buttonPlay
+            // listBoxRecords
             // 
-            this.buttonPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonPlay.Location = new System.Drawing.Point(450, 445);
-            this.buttonPlay.Name = "buttonPlay";
-            this.buttonPlay.Size = new System.Drawing.Size(313, 70);
-            this.buttonPlay.TabIndex = 0;
-            this.buttonPlay.Text = "ИГРАТЬ";
-            this.buttonPlay.UseVisualStyleBackColor = true;
-            this.buttonPlay.Click += new System.EventHandler(this.buttonPlay_Click);
+            this.listBoxRecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listBoxRecords.FormattingEnabled = true;
+            this.listBoxRecords.ItemHeight = 24;
+            this.listBoxRecords.Location = new System.Drawing.Point(55, 62);
+            this.listBoxRecords.Name = "listBoxRecords";
+            this.listBoxRecords.Size = new System.Drawing.Size(680, 316);
+            this.listBoxRecords.TabIndex = 0;
+            this.listBoxRecords.SelectedIndexChanged += new System.EventHandler(this.listBoxRecords_SelectedIndexChanged);
             // 
-            // MenuForm
+            // RecordsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::NewGameFindWords.Properties.Resources.fon;
+            this.BackgroundImage = global::NewGameFindWords.Properties.Resources.main3;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1232, 650);
-            this.Controls.Add(this.buttonPlay);
-            this.DoubleBuffered = true;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBoxRecords);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MinimizeBox = false;
-            this.Name = "MenuForm";
-            this.Text = "MenuForm";
-            this.Load += new System.EventHandler(this.MenuForm_Load);
+            this.Name = "RecordsForm";
+            this.Text = "Результаты";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonPlay;
+        private System.Windows.Forms.ListBox listBoxRecords;
     }
 }
