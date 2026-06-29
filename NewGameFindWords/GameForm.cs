@@ -11,8 +11,10 @@ using System.Xml.Linq;
 
 namespace NewGameFindWords
 {
+    
     public partial class GameForm : Form
     {
+        Random rand = new Random();
         GameBoard gameBoard;
         List<(int X, int Y)> userSelection = new List<(int X, int Y)>();
         
@@ -67,7 +69,7 @@ namespace NewGameFindWords
                 });
             }
 
-            Random rand = new Random();
+            
             for (int i = themeWordsBank.Count - 1; i > 0; i--)
             {
                 int j = rand.Next(i + 1);
@@ -124,7 +126,6 @@ namespace NewGameFindWords
 
             int calculatedRowHeight = (dataGridView1.ClientSize.Height - 2) / size;
 
-            // 4. Задаем высоту строк и заполняем буквами
             for (int y = 0; y < size; y++)
             {
                 dataGridView1.Rows[y].Height = calculatedRowHeight; 
@@ -208,7 +209,7 @@ namespace NewGameFindWords
 
                     allRecords.Add(newGameData);
 
-                    var options = new System.Text.Json.JsonSerializerOptions { WriteIndented = true }; // Чтобы текст в файле был красивым, с отступами
+                    var options = new System.Text.Json.JsonSerializerOptions { WriteIndented = true }; 
                     string updatedJson = System.Text.Json.JsonSerializer.Serialize(allRecords, options);
                     System.IO.File.WriteAllText(filePath, updatedJson);
 
@@ -245,7 +246,6 @@ namespace NewGameFindWords
 
         private void подсказкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Запрашиваем у мозга игры одно ненайденное слово
             string hintWord = gameBoard.GetRandomNotFoundedWord();
 
             if (hintWord != null)
@@ -316,13 +316,10 @@ namespace NewGameFindWords
         {
             wordTimer.Stop();
 
-            // Создаем экземпляр окна результатов
             RecordsForm recordsWindow = new RecordsForm();
 
-            // Открываем его модально (поверх игры)
             recordsWindow.ShowDialog();
 
-            // Когда игрок закроет окно рекордов, возвращаем таймер игры назад
             wordTimer.Start();
         }
     }
