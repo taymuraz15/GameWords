@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace NewGameFindWords
 {
@@ -94,6 +95,86 @@ namespace NewGameFindWords
             }
             return count;
         }
+
+        public bool TryAutoAddWord(string text)
+        {
+            text = text.ToUpper();
+            int wordLength = text.Length;
+
+            if (wordLength > Size) return false;
+
+            var validPositions = new List<(int X, int Y, bool IsHorizontal)>();
+
+            for (int y = 0; y < Size; y++)
+            {
+                for (int x = 0; x <= Size - wordLength; x++)
+                {
+                    bool canPlace = true;
+                    for (int i = 0; i < wordLength; i++)
+                    {
+                        if (GameTable[x + i, y].NotFree)
+                        {
+                            canPlace = false;
+                            break;
+                        }
+                    }
+                    if (canPlace)
+                    {
+                        validPositions.Add((x, y, true));
+                    }
+                }
+            }
+            for (int x = 0; x < Size; x++)
+            {
+                for (int y = 0; y <= Size - wordLength; y++)
+                {
+                    bool canPlace = true;
+                    for (int i = 0; i < wordLength; i++)
+                    {
+                        if (GameTable[x, y + i].NotFree)
+                        {
+                            canPlace = false;
+                            break;
+                        }
+                    }
+                    if (canPlace)
+                    {
+                        validPositions.Add((x, y, false));
+                    }
+                }
+            }
+            if (validPositions.Count == 0)
+            {
+                return false;
+            }
+
+            Random rand = new Random();
+            var chosenPosition = validPositions[rand.Next(validPositions.Count)];
+
+            List<(int X, int Y)> finalCoords = new List<(int X, int Y)>();
+            for (int i = 0; i < wordLength; i++)
+            {
+                int currentX;
+                int currentY;
+
+                if (chosenPosition.IsHorizontal)
+                {
+                    currentX = chosenPosition.X + i;
+                    currentY = chosenPosition.Y;
+                }
+                else
+                {
+                    currentX = chosenPosition.X;
+                    currentY = chosenPosition.Y + i;
+                }
+
+                finalCoords.Add((currentX, currentY));
+            }
+
+            AddWord(text, finalCoords);
+            return true;
+        }
+
 
 
     }

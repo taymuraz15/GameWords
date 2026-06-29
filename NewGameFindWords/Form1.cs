@@ -13,18 +13,67 @@ namespace NewGameFindWords
     public partial class Form1 : Form
     {
         GameBoard gameBoard;
+        List<(int X, int Y)> userSelection = new List<(int X, int Y)>();
+
+        string currentTheme = "Животные";
+        string currentDifficulty = "Легко";
+
         public Form1()
         {
             InitializeComponent();
-            dataGridView1.Rows.Add(5);
-            dataGridView1.Rows[0].Cells[0].Value = "А";
+            StartNewGame();
+        }
+
+        void StartNewGame()
+        {
+            userSelection.Clear();
             gameBoard = new GameBoard();
-            gameBoard.AddWord("ГÆДЫ", new List<(int X, int Y)> { (0, 0), (1, 0), (2, 0), (3,0) });
-            gameBoard.AddWord("КУЫДЗ", new List<(int X, int Y)> { (0, 2), (1, 2), (2, 2), (3, 2), (4, 2) });
+
+            List<string> themeWordsBank = new List<string>();
+
+            if (currentTheme == "Животные")
+            {
+                themeWordsBank.AddRange(new string[] {
+                    "ГÆДЫ", "КУЫДЗ", "РУВАС", "БÆХ",
+                    "ГАЛ", "ЦÆГÆР", "АРС", "БИРÆГ", "СТЫР"
+                });
+            }
+            else if (currentTheme == "Еда")
+            {
+                themeWordsBank.AddRange(new string[] {
+                    "НУРР", "СЫРХ", "ÆХСЫР", "ЦÆХХ",
+                    "ДУР", "КАША", "СУПП", "БÆРÆГ", "ФЫД"
+                });
+            }
+
+            Random rand = new Random();
+            for (int i = themeWordsBank.Count - 1; i > 0; i--)
+            {
+                int j = rand.Next(i + 1);
+                string temp = themeWordsBank[i];
+                themeWordsBank[i] = themeWordsBank[j];
+                themeWordsBank[j] = temp;
+            }
+            int wordsPlaced = 0;
+            foreach (var wordText in themeWordsBank)
+            {
+                if (wordsPlaced >= 2) break; 
+
+                bool success = gameBoard.TryAutoAddWord(wordText);
+                if (success)
+                {
+                    wordsPlaced++;
+                }
+            }
+
             gameBoard.FillEmptyCells();
+
             FillGameTable();
+
             int countNeedToFindWords = gameBoard.GetCountNotFoundedWords();
             labelCountFindWord.Text = countNeedToFindWords.ToString();
+
+            this.Text = $"Поиск слов | Тема: {currentTheme} | Сложность: {currentDifficulty}";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -45,7 +94,7 @@ namespace NewGameFindWords
                 }
             }
         }
-        List<(int X, int Y)> userSelection = new List<(int X, int Y)>();
+
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
@@ -88,13 +137,12 @@ namespace NewGameFindWords
                 }
                 int countNeedToFindWords = gameBoard.GetCountNotFoundedWords();
 
-                if (countNeedToFindWords > 0)
-                {
-                    labelCountFindWord.Text = countNeedToFindWords.ToString();
-                }
-                else
+                labelCountFindWord.Text = countNeedToFindWords.ToString();
+
+                if (countNeedToFindWords == 0)
                 {
                     MessageBox.Show("Поздравляем! Вы нашли все слова и выиграли!");
+                    StartNewGame();
                 }
             }
             else
@@ -106,6 +154,25 @@ namespace NewGameFindWords
                 }
             }
             userSelection.Clear();
+        }
+
+       
+        
+
+        
+
+        private void едаToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            currentTheme = "Еда";
+            StartNewGame();
+        }
+
+        
+
+        private void животныеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            currentTheme = "Животные";
+            StartNewGame();
         }
     }
 }
